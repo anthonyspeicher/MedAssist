@@ -1,4 +1,8 @@
-fastapi
-uvicorn[standard]
-pydantic[dotenv]
-python-multipart
+fastapi[standard]
+transformers
+torch
+torchvision
+torchxrayvision
+pillow
+flask
+tensorflow

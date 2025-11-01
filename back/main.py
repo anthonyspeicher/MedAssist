@@ -1,22 +1,23 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from app.routes import upload
+from PIL import Image, UnidentifiedImageError
+import io
+import os
 
-app = FastAPI(title="MedAssist AI Backend")
+app = FastAPI(title="Chest X-Ray Diagnostic API")
 
-# Allow local frontend
+# Allow all origins for now (for local testing)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
-    allow_credentials=True,
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-from routes import upload
 
 app.include_router(upload.router, prefix="/api")
 
 @app.get("/")
 def root():
-    return {"message": "Backend is running"}
-
+    return {"message": "Chest X-Ray Analyzer API is running."}
