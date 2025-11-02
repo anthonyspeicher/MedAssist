@@ -16,7 +16,7 @@ export default function App() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8000/api/upload/", {
+      const res = await fetch("http://localhost:8000/analyze/", {
         method: "POST",
         body: formData,
       });
@@ -42,7 +42,7 @@ export default function App() {
       </button>
 
       {result && (
-        <div style={{marginTop:"2rem"}}>
+        <div>
           <h2>Results</h2>
 
           <p>

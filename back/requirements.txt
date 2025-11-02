@@ -6,3 +6,6 @@ torchxrayvision
 pillow
 flask
 tensorflow
+sqlalchemy
+psycopg2-binary
+alembic
