@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./back
+    container_name: medassist-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://meduser:medpass@db:5433/medassist
+    depends_on:
+      - db
+    volumes:
+      - ./back:/app
+
+  frontend:
+    build: ./front
+    container_name: medassist-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./front:/app
+
+  db:
+    image: postgres:16
+    container_name: medassist-db
+    restart: always
+    environment:
+      POSTGRES_DB: medassist
+      POSTGRES_USER: meduser
+      POSTGRES_PASSWORD: medpass
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

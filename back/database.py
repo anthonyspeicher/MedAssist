@@ -2,9 +2,11 @@ from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
+import os
 
 # create session and base
-engine = create_engine("postgresql://meduser:medpass@localhost:5432/medassist")
+DB_URL = os.getenv("DATABASE_URL")
+engine = create_engine(DB_URL)
 localSession = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 
 Base = declarative_base()
